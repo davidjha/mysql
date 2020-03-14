@@ -21,10 +21,6 @@ Documentation: https://www.hpc.iastate.edu/guides/containers/mysql-server
     mysqlrootpw /mysqlrootpw
     create_remote_admin_user.sh /usr/local/bin/create_remote_admin_user.sh
 
-%environment
-    HOSTNAME=hostname
-    export HOSTNAME
-
 %post
     chmod +x /usr/local/bin/create_remote_admin_user.sh
 
@@ -64,6 +60,8 @@ Documentation: https://www.hpc.iastate.edu/guides/containers/mysql-server
         echo "Initializing mysqld"
         mysqld --initialize  --init-file=${HOME}/.mysqlrootpw
     fi
+
+    hostname > mysql_hostname
 
     # Finally, launch mysqld
     echo ""
